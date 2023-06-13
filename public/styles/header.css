@@ -1,0 +1,88 @@
+header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background: #008c83;
+    top: 0;
+    left: 0;
+    height: 9rem;
+    width: 100%;
+    z-index: 30;
+}
+
+
+header img {
+    left: 10rem;
+    width: 9rem;
+    height: 9rem;
+    position: fixed;
+    top: 0rem
+    
+}
+
+hr {
+    height: 9rem;
+    color: white;
+}
+
+a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+main {
+    background-color: #ffffff;
+    background-size: cover;
+    height: 92vh;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-list li {
+    letter-spacing: 3px;
+    text-align: center;
+    
+    justify-content: space-around;
+}
+
+.mobile-menu {
+    position: fixed;
+    cursor: pointer;
+    left: 100rem;
+    top: 3.6rem;
+}
+
+.mobile-menu div {
+    width: 32px;
+    height: 2px;
+    background: #ffffff;
+    margin: 8px;
+}
+
+.carousel {
+    position: absolute;
+    left: 29rem;
+    top: 11rem;
+    width: 50%;
+    height: 30rem;
+    animation: carouselAnim 20s ease 0s infinite normal forwards;
+}
+
+@keyframes carouselAnim {
+    0% { background-image: url("../images/pcd1.jpg"); 
+        background-repeat: no-repeat; background-size: cover;}
+    25% { background-image: url("../images/pcd2.png"); 
+        background-repeat: no-repeat; background-size: cover;}
+    50% { background-image: url("../images/pcd3.jpg"); 
+        background-repeat: no-repeat; background-size: cover;}
+    75% { background-image: url("../images/pcd4.webp");
+         background-repeat: no-repeat; background-size: cover;}
+    100%{ background-image: url("../images/pcd5.jpg");
+        background-repeat: no-repeat; background-size: cover;}}
