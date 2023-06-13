@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles/header.css">
+
+    <style>
+        h1 { top: 11rem;
+        
+        }
+    </style>
+
+
+    <title>Front-End</title>
+</head>
+<body>
+   
+
+    <header>
+        <nav>
+         <a href="index.html" class="logo"> <img src="images/Logo Empcd.png" alt="LogoEMPCD"> </a>
+
+            <div class="mobile-menu" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Estilização Menu OffCanvas -->
+    <div class="offcanvas offcanvas-start" id="demo">
+        <div class="offcanvas-header">
+          <h1 class="offcanvas-title">Menu</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+
+        <div class="offcanvas-body">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="itens.html">Itens</a></li>
+                <li><a href="formulario.html">Entrar</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="adicionarIten.html">Adicionar Vaga</a></li>
+            </ul>
+        </div>
+      </div>
+
+      <hr>
+
+      <main class="container">
+        <h1>Adicionar vaga</h1>
+        <div id="produtos">
+          <form class="row g-3" id="meuForm">
+    
+    
+    
+            <div class="col-md-12">
+              <label for="nome" class="form-label">Nome da Vaga</label>
+              <input type="text" class="form-control" id="nome" name="nome">
+              <small id="nomeError" style="display: none;">Nome errado</small>
+            </div>
+            
+    
+    
+            <div class="mb-3">
+              <label for="descricao" class="form-label">Descrição da vaga</label>
+              <textarea class="form-control" name="descricao" id="descricao" rows="3"></textarea>
+            </div>
+            <div class="col-md-4 ">
+              <label for="serie" class="form-label">Série</label>
+              <input type="text" class="form-control" name="serie" id="serie" aria-describedby="helpId" placeholder="">
+              <small id="helpId" class="form-text text-muted">Número de Série (Único)</small>
+            </div>
+    
+            <div class="col-12">
+              <button id="submitButton" type="submit" class="btn btn-primary">Cadastrar vaga</button>
+            </div>
+          </form>
+    
+          <div id="preencherFotoDiv">
+            <form id="preencherFotoForm" >
+              <div class="mb-3">
+                <label for="avatar" class="form-label">Adicionar foto da vaga</label>
+                <input class="form-control" type="file" id="avatar" name="avatar">
+              </div>
+              <div class="col-12">
+                <button id="submitPhoto" type="submit" class="btn btn-primary">Alterar Foto</button>
+              </div>
+    
+            </form>
+          </div>
+        </div>
+      </main>
+    
+      <script>
+
+        const meuForm = document.getElementById("meuForm");
+        const preencherFotoForm = document.getElementById("preencherFotoForm");
+        const nomeError = document.getElementById('nomeError');
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+    
+        meuForm.addEventListener('submit', ev => {
+          ev.preventDefault();
+          const formData = new FormData(meuForm);
+          const produto = {};
+    
+    
+          formData.forEach((valor, atributo) => produto[atributo] = valor);
+    
+          if(produto.nome.length) {
+            console.log('here error')
+            nomeError.style = { display: 'block', color: 'red'}
+            return;
+          }
+    
+          console.log(JSON.stringify(produto))
+          fetch('http://localhost:38000/app/produtos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(produto)
+          })
+            .then(r => r.json())
+        })
+    
+        preencherFotoForm.addEventListener('submit', ev2 => {
+          ev2.preventDefault();
+          
+         
+          const formData2 = new FormData(preencherFotoForm);
+          fetch('http://localhost:38000/app/produtos/' + id + '/photo', {
+            method: 'PUT',
+            body: formData2
+          })
+            .then(r => r.json())
+        })
+    
+        function loadProduto() {
+         
+          if (id) {
+            
+    
+            fetch('http://localhost:38000/app/produtos/' + id)
+              .then(r => r.json())
+              .then(produto => {
+                console.log(produto)
+                document.getElementById("nome").value = produto.nome
+                document.getElementById("descricao").value = produto.descricao
+                document.getElementById("preco").value = produto.preco
+                document.getElementById("serie").value = produto.serie
+    
+              })
+    
+          } else {
+            document.getElementById('preencherFotoDiv').style.display="none"
+          }
+        }
+    
+    
+        loadProduto();
+
+        </script>
+ 
+    
+</body>
+</html>
+
+
+
+
