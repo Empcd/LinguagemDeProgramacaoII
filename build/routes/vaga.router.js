@@ -8,7 +8,7 @@ const vaga_controller_1 = __importDefault(require("../controllers/vaga.controlle
 const zod_express_middleware_1 = require("zod-express-middleware");
 const VagaDto_1 = require("../dto/VagaDto");
 const vagaRouter = (0, express_1.Router)();
-vagaRouter.post('/', (0, zod_express_middleware_1.validateRequest)({ body: VagaDto_1.VagaSchema }), vaga_controller_1.default.getInstance().criarVaga);
-vagaRouter.get('/:id', (0, zod_express_middleware_1.validateRequest)({ params: VagaDto_1.VagaId }), vaga_controller_1.default.getInstance().lerVagaPorId);
-vagaRouter.get('/', vaga_controller_1.default.getInstance().lerTodasVagas);
+vagaRouter.post('/create', (0, zod_express_middleware_1.validateRequest)({ body: VagaDto_1.VagaSchema }), vaga_controller_1.default.getInstance().criarVaga);
+vagaRouter.get('/read/ :id', (0, zod_express_middleware_1.validateRequest)({ params: VagaDto_1.VagaId }), vaga_controller_1.default.getInstance().lerVagaPorId);
+vagaRouter.get('/read', vaga_controller_1.default.getInstance().lerTodasVagas);
 exports.default = vagaRouter;

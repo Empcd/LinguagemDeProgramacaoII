@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles/header.css">
 
     <style>
@@ -62,7 +61,6 @@
             <div class="col-md-12">
               <label for="nome" class="form-label">Nome da Vaga</label>
               <input type="text" class="form-control" id="nome" name="nome">
-              <small id="nomeError" style="display: none;">Nome errado</small>
             </div>
             
     
@@ -71,28 +69,27 @@
               <label for="descricao" class="form-label">Descrição da vaga</label>
               <textarea class="form-control" name="descricao" id="descricao" rows="3"></textarea>
             </div>
-            <div class="col-md-4 ">
-              <label for="serie" class="form-label">Série</label>
-              <input type="text" class="form-control" name="serie" id="serie" aria-describedby="helpId" placeholder="">
-              <small id="helpId" class="form-text text-muted">Número de Série (Único)</small>
+
+            <div class="col-md-12">
+              <label for="outrosrequisitos" class="form-label">Outros requisitos</label>
+              <input type="text" class="form-control" id="outrosrequisitos" name="outrosrequisitos">
             </div>
     
+            <div class="col-md-12">
+              <label for="tipodevaga" class="form-label">Tipo de vaga</label>
+              <input type="text" class="form-control" id="tipodevaga" name="tipodevaga">
+            </div>
+
+            <div class="col-md-12">
+              <label for="especificacao" class="form-label">Escpecificações</label>
+              <input type="text" class="form-control" id="especificacao" name="especificacao">
+            </div>
+
             <div class="col-12">
-              <button id="submitButton" type="submit" class="btn btn-primary">Cadastrar vaga</button>
+              <button id="submit" type="submit" class="btn btn-primary">Cadastrar vaga</button>
             </div>
           </form>
-    
-          <div id="preencherFotoDiv">
-            <form id="preencherFotoForm" >
-              <div class="mb-3">
-                <label for="avatar" class="form-label">Adicionar foto da vaga</label>
-                <input class="form-control" type="file" id="avatar" name="avatar">
-              </div>
-              <div class="col-12">
-                <button id="submitPhoto" type="submit" class="btn btn-primary">Alterar Foto</button>
-              </div>
-    
-            </form>
+          
           </div>
         </div>
       </main>
@@ -100,75 +97,54 @@
       <script>
 
         const meuForm = document.getElementById("meuForm");
-        const preencherFotoForm = document.getElementById("preencherFotoForm");
-        const nomeError = document.getElementById('nomeError');
     
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
-    
-        meuForm.addEventListener('submit', ev => {
-          ev.preventDefault();
+        addEventListener('submit', (event) => {
+          event.preventDefault();
           const formData = new FormData(meuForm);
           const produto = {};
     
-    
           formData.forEach((valor, atributo) => produto[atributo] = valor);
+          console.log(produto)
     
-          if(produto.nome.length) {
-            console.log('here error')
-            nomeError.style = { display: 'block', color: 'red'}
-            return;
-          }
-    
-          console.log(JSON.stringify(produto))
-          fetch('http://localhost:38000/app/produtos', {
+
+          fetch('http://localhost:3838/vagas/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(produto)
+          }).then((Response) => {
+            console.log('deu certo')
+          }).catch((err) => {
+            console.log(err)
           })
-            .then(r => r.json())
         })
-    
-        preencherFotoForm.addEventListener('submit', ev2 => {
-          ev2.preventDefault();
-          
-         
-          const formData2 = new FormData(preencherFotoForm);
-          fetch('http://localhost:38000/app/produtos/' + id + '/photo', {
-            method: 'PUT',
-            body: formData2
-          })
-            .then(r => r.json())
-        })
-    
-        function loadProduto() {
-         
-          if (id) {
-            
-    
-            fetch('http://localhost:38000/app/produtos/' + id)
-              .then(r => r.json())
-              .then(produto => {
-                console.log(produto)
-                document.getElementById("nome").value = produto.nome
-                document.getElementById("descricao").value = produto.descricao
-                document.getElementById("preco").value = produto.preco
-                document.getElementById("serie").value = produto.serie
-    
-              })
-    
-          } else {
-            document.getElementById('preencherFotoDiv').style.display="none"
-          }
-        }
-    
-    
-        loadProduto();
 
+        function loadProduto() {
+          if (Id) {
+       
+
+          fetch('http://localhost:3838/vagas/create/' + id)
+            .then(r => r.json())
+            .then(produto => {
+              console.log(produto)
+              document.getElementById("tipodevaga").value = produto.tipodevaga
+              document.getElementById("descricao").value = produto.descricao
+              document.getElementById("especificacao").value = produto.especificacao
+              document.getElementById("nome").value = produto.nome
+              document.getElementById("outrosrequisitos").value = produto.outrosrequisitos
+
+         })
+
+     }}
+
+
+   loadProduto();
         </script>
  
     
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
 </html>
 
 

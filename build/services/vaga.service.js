@@ -27,16 +27,13 @@ class VagaService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const vaga = new Vaga_1.default();
-                vaga.cidade = dto.cidade;
-                vaga.cnpj = dto.cnpj;
                 vaga.descricao = dto.descricao;
-                vaga.email = dto.email;
-                vaga.endereco = dto.endereco;
                 vaga.id = Math.round(Math.random() * 1E6).toString();
                 vaga.nome = dto.nome;
                 vaga.salario = dto.salario;
-                vaga.telefone = dto.telefone;
-                vaga.uf = dto.uf;
+                vaga.tipodevaga = dto.tipodevaga;
+                vaga.outrosrequisitos = dto.outrosrequisitos;
+                vaga.especificacao = dto.especificacao;
                 return yield Reposit_rio_1.VagaRepositorio.save(vaga);
             }
             catch (err) {

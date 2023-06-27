@@ -13,31 +13,23 @@ const typeorm_1 = require("typeorm");
 let Vaga = class Vaga {
 };
 __decorate([
-    (0, typeorm_1.PrimaryColumn)({ nullable: false }),
+    (0, typeorm_1.PrimaryColumn)({ nullable: false, length: 6 }),
     __metadata("design:type", String)
 ], Vaga.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ unique: true, nullable: false }),
+    (0, typeorm_1.Column)({ unique: true, nullable: false, length: 25 }),
     __metadata("design:type", String)
 ], Vaga.prototype, "nome", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ length: 150 }),
+    __metadata("design:type", String)
+], Vaga.prototype, "outrosrequisitos", void 0);
+__decorate([
     (0, typeorm_1.Column)({ nullable: false }),
     __metadata("design:type", String)
-], Vaga.prototype, "cnpj", void 0);
+], Vaga.prototype, "tipodevaga", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Vaga.prototype, "endereco", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Vaga.prototype, "cidade", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Vaga.prototype, "uf", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: false }),
     __metadata("design:type", String)
 ], Vaga.prototype, "descricao", void 0);
 __decorate([
@@ -47,11 +39,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ nullable: false }),
     __metadata("design:type", String)
-], Vaga.prototype, "telefone", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: false }),
-    __metadata("design:type", String)
-], Vaga.prototype, "email", void 0);
+], Vaga.prototype, "especificacao", void 0);
 Vaga = __decorate([
     (0, typeorm_1.Entity)()
 ], Vaga);

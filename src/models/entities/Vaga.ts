@@ -2,26 +2,20 @@ import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
 class Vaga {
-    @PrimaryColumn({nullable: false})
+    @PrimaryColumn({nullable: false, length:6})
     id: string;
-    @Column({unique: true, nullable: false})
+    @Column({unique: true, nullable: false, length:25})
     nome: string;
+    @Column({length:150})
+    outrosrequisitos: string;
     @Column({nullable: false})
-    cnpj: string;
-    @Column()
-    endereco: string;
-    @Column()
-    cidade: string;
-    @Column()
-    uf: string;
-    @Column()
+    tipodevaga: string;
+    @Column({nullable: false})
     descricao: string;
     @Column('decimal', { precision: 6, scale: 2, nullable: true})
     salario: number;
     @Column({nullable: false})
-    telefone: string;
-    @Column({nullable: false})
-    email: string;
+    especificacao: string;
 }
 export default Vaga
 
