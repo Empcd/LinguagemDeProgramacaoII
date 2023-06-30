@@ -52,5 +52,17 @@ class VagaController {
             }
         });
     }
+    deletarVaga(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const id = req.params.id;
+                yield vaga_service_1.default.getInstance().deletarVaga(id);
+                res.json('ok');
+            }
+            catch (error) {
+                res.status(500).send(error);
+            }
+        });
+    }
 }
 exports.default = VagaController;

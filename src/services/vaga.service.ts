@@ -43,6 +43,14 @@ class VagaService {
             return Promise.reject('Not Found')
         }
     }
+
+    public async deletarVaga (id : string): Promise<void>{
+        try{
+            await VagaRepositorio.delete({id});
+        }catch(err){
+            return Promise.reject('Vaga inesistente')
+        }
+    }
 }
 
 export default VagaService;

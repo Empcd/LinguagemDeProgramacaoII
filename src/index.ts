@@ -11,6 +11,6 @@ app.use(express.static('public'));
 
 AppDataSource.initialize().then(() => console.log('Banco Inicializado.'))
 
-app.use('/vagas', vagaRouter);
+app.use('/app/vagas', vagaRouter);
 
 app.listen(3838, () => console.log('Iniciando'));

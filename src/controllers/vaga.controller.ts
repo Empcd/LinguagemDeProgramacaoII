@@ -38,6 +38,16 @@ class VagaController {
             res.status(500).send(error)
         }
     }
+
+    public async deletarVaga(req:Request, res:Response){
+        try{
+            const id = req.params.id;
+            await VagaService.getInstance().deletarVaga(id);
+            res.json('ok')
+        }catch(error){
+            res.status(500).send(error);
+        }
+    }
 }
 
 export default VagaController;

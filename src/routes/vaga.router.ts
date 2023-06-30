@@ -6,8 +6,9 @@ import upload from "../middlewares/storage";
 
 const vagaRouter = Router();
 
-vagaRouter.post('/create', validateRequest({body: VagaSchema}), VagaController.getInstance().criarVaga);
-vagaRouter.get('/read/ :id', validateRequest({params: VagaId}), VagaController.getInstance().lerVagaPorId);
-vagaRouter.get('/read', VagaController.getInstance().lerTodasVagas);
+vagaRouter.post('/', validateRequest({body: VagaSchema}), VagaController.getInstance().criarVaga);
+vagaRouter.get('/ :id', validateRequest({params: VagaId}), VagaController.getInstance().lerVagaPorId);
+vagaRouter.get('/', VagaController.getInstance().lerTodasVagas);
+vagaRouter.delete('/ :id', validateRequest({params:VagaId}),VagaController.getInstance().deletarVaga)
 
 export default vagaRouter;

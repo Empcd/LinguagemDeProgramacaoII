@@ -57,5 +57,15 @@ class VagaService {
             }
         });
     }
+    deletarVaga(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield Reposit_rio_1.VagaRepositorio.delete({ id });
+            }
+            catch (err) {
+                return Promise.reject('Vaga inesistente');
+            }
+        });
+    }
 }
 exports.default = VagaService;

@@ -11,5 +11,5 @@ exports.VagaSchema = zod_1.z.object({
     salario: zod_1.z.coerce.number().optional(),
 });
 exports.VagaId = zod_1.z.object({
-    id: zod_1.z.string().min(5)
+    id: zod_1.z.string().min(6)
 });

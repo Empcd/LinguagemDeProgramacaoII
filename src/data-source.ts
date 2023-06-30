@@ -13,4 +13,4 @@ export const AppDataSource = new DataSource({
     entities: [Vaga],
     subscribers: [],
     migrations: []
-})
+});

@@ -20,5 +20,5 @@ export const VagaSchema = z.object({
 })
 
 export const VagaId = z.object({
-    id: z.string().min(5)
+    id: z.string().min(6)
 })

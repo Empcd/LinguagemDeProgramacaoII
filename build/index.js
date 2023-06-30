@@ -12,5 +12,5 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.static('public'));
 data_source_1.AppDataSource.initialize().then(() => console.log('Banco Inicializado.'));
-app.use('/vagas', vaga_router_1.default);
+app.use('/app/vagas', vaga_router_1.default);
 app.listen(3838, () => console.log('Iniciando'));
